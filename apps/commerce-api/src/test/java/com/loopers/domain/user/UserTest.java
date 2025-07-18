@@ -58,7 +58,7 @@ class UserTest {
 			);
 
 			UserId fakeUserId = mock(UserId.class);
-			when(fakeUserId.getUserId()).thenReturn("testuser");
+			when(fakeUserId.value()).thenReturn("testuser");
 			mockUserId.when(() -> UserId.of("testuser")).thenReturn(fakeUserId);
 
 			Email fakeEmail = mock(Email.class);
@@ -77,7 +77,7 @@ class UserTest {
 
 			assertAll(
 				() -> assertThat(user).isNotNull(),
-				() -> assertThat(user.getUserId().getUserId()).isEqualTo("testuser"),
+				() -> assertThat(user.getUserId().value()).isEqualTo("testuser"),
 				() -> assertThat(user.getEmail().getEmailAddress()).isEqualTo("test@example.com"),
 				() -> assertThat(user.getGender()).isEqualTo(Gender.MALE),
 				// birthDate는 모킹하지 않았으므로 실제 파싱 결과를 검증합니다.

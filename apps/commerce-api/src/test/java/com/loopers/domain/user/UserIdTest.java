@@ -34,7 +34,7 @@ class UserIdTest {
 			// then
 			assertAll(
 				() -> assertThat(userId).isNotNull(),
-				() -> assertThat(userId.getUserId()).isEqualTo(validId)
+				() -> assertThat(userId.value()).isEqualTo(validId)
 			);
 		}
 

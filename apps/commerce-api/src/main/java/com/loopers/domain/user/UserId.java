@@ -30,7 +30,7 @@ public class UserId {
 		return new UserId(userId);
 	}
 
-	public String getUserId() {
+	public String value() {
 		return userId;
 	}
 }

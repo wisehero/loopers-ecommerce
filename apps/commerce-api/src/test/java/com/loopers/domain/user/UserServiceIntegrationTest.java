@@ -49,7 +49,7 @@ class UserServiceIntegrationTest extends IntegrationTestSupport {
 
 			User findUser = userJpaRepository.findByUserId(UserId.of("testUser")).get();
 			assertAll(
-				() -> assertThat(findUser.getUserId().getUserId()).isEqualTo("testUser"),
+				() -> assertThat(findUser.getUserId().value()).isEqualTo("testUser"),
 				() -> assertThat(findUser.getEmail().getEmailAddress()).isEqualTo("test.user@example.com"),
 				() -> assertThat(findUser.getGender().name()).isEqualTo("MALE"),
 				() -> assertThat(findUser.getBirthDate().toString()).isEqualTo("1996-05-04")

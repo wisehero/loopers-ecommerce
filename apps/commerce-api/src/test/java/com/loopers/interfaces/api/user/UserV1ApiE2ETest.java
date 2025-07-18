@@ -69,7 +69,7 @@ public class UserV1ApiE2ETest {
 			);
 			User savedUser = userJpaRepository.save(User.create(command));
 			String requestHeaderKey = "X-USER-ID";
-			String requestHeaderValue = savedUser.getUserId().getUserId();
+			String requestHeaderValue = savedUser.getUserId().value();
 
 			// when
 			var responseType = new ParameterizedTypeReference<ApiResponse<UserV1Dto.UserResponse>>() {
@@ -87,7 +87,7 @@ public class UserV1ApiE2ETest {
 				() -> assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK),
 				() -> {
 					UserV1Dto.UserResponse responseData = response.getBody().data();
-					assertThat(responseData.userId()).isEqualTo(savedUser.getUserId().getUserId());
+					assertThat(responseData.userId()).isEqualTo(savedUser.getUserId().value());
 					assertThat(responseData.email()).isEqualTo(savedUser.getEmail().getEmailAddress());
 					assertThat(responseData.gender()).isEqualTo(savedUser.getGender().name());
 					assertThat(responseData.birthDate()).isEqualTo(savedUser.getBirthDate().toString());
