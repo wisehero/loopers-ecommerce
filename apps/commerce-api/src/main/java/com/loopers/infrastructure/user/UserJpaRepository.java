@@ -9,5 +9,5 @@ import com.loopers.domain.user.User;
 
 public interface UserJpaRepository extends JpaRepository<User, Long> {
 
-	Optional<User> findByUserId(LoginId loginId);
+	Optional<User> findByLoginId(LoginId loginId);
 }

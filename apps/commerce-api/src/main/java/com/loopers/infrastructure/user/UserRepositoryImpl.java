@@ -22,7 +22,7 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public Optional<User> findByUserId(LoginId loginId) {
-		return userJpaRepository.findByUserId(loginId);
+	public Optional<User> findByLoginId(LoginId loginId) {
+		return userJpaRepository.findByLoginId(loginId);
 	}
 }

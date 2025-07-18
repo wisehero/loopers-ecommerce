@@ -20,6 +20,6 @@ public class UserService {
 	}
 
 	public Optional<User> findByUserId(LoginId loginId) {
-		return userRepository.findByUserId(loginId);
+		return userRepository.findByLoginId(loginId);
 	}
 }

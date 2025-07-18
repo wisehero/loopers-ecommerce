@@ -141,7 +141,7 @@ public class UserV1ApiE2ETest {
 					UserV1Dto.UserResponse responseData = response.getBody().data();
 					assertThat(responseData.userId()).isEqualTo("newUser");
 				},
-				() -> assertThat(userJpaRepository.findByUserId(LoginId.of("newUser"))).isPresent()
+				() -> assertThat(userJpaRepository.findByLoginId(LoginId.of("newUser"))).isPresent()
 			);
 		}
 

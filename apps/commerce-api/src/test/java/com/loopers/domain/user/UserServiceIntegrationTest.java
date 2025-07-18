@@ -47,7 +47,7 @@ class UserServiceIntegrationTest extends IntegrationTestSupport {
 			// then
 			verify(userRepository, times(1)).save(any(User.class));
 
-			User findUser = userJpaRepository.findByUserId(LoginId.of("testUser")).get();
+			User findUser = userJpaRepository.findByLoginId(LoginId.of("testUser")).get();
 			assertAll(
 				() -> assertThat(findUser.getLoginId().value()).isEqualTo("testUser"),
 				() -> assertThat(findUser.getEmail().getEmailAddress()).isEqualTo("test.user@example.com"),
@@ -74,7 +74,7 @@ class UserServiceIntegrationTest extends IntegrationTestSupport {
 			Optional<User> result = userService.findByUserId(loginIdToFind);
 
 			// then
-			verify(userRepository, times(1)).findByUserId(loginIdToFind);
+			verify(userRepository, times(1)).findByLoginId(loginIdToFind);
 			assertAll(
 				() -> assertThat(result).isPresent(),
 				() -> assertThat(result.get().getLoginId()).isEqualTo(loginIdToFind)
