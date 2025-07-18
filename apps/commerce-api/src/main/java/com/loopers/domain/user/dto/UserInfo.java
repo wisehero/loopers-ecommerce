@@ -4,18 +4,18 @@ import java.time.LocalDate;
 
 import com.loopers.domain.user.Email;
 import com.loopers.domain.user.Gender;
+import com.loopers.domain.user.LoginId;
 import com.loopers.domain.user.User;
-import com.loopers.domain.user.UserId;
 
 public record UserInfo(
-	UserId userId,
+	LoginId loginId,
 	Email email,
 	Gender gender,
 	LocalDate birthDate
 ) {
 	public static UserInfo from(User user) {
 		return new UserInfo(
-			user.getUserId(),
+			user.getLoginId(),
 			user.getEmail(),
 			user.getGender(),
 			user.getBirthDate()

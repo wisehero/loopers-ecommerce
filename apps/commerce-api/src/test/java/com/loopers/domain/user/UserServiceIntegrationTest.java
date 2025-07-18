@@ -47,9 +47,9 @@ class UserServiceIntegrationTest extends IntegrationTestSupport {
 			// then
 			verify(userRepository, times(1)).save(any(User.class));
 
-			User findUser = userJpaRepository.findByUserId(UserId.of("testUser")).get();
+			User findUser = userJpaRepository.findByUserId(LoginId.of("testUser")).get();
 			assertAll(
-				() -> assertThat(findUser.getUserId().value()).isEqualTo("testUser"),
+				() -> assertThat(findUser.getLoginId().value()).isEqualTo("testUser"),
 				() -> assertThat(findUser.getEmail().getEmailAddress()).isEqualTo("test.user@example.com"),
 				() -> assertThat(findUser.getGender().name()).isEqualTo("MALE"),
 				() -> assertThat(findUser.getBirthDate().toString()).isEqualTo("1996-05-04")
@@ -59,7 +59,7 @@ class UserServiceIntegrationTest extends IntegrationTestSupport {
 
 	@DisplayName("사용자를 ID로 조회할 때, ")
 	@Nested
-	class findByUserId {
+	class findByLoginId {
 
 		@DisplayName("사용자가 존재하면, repository의 findByUserId가 호출되고 User 객체를 반환한다.")
 		@Test
@@ -68,16 +68,16 @@ class UserServiceIntegrationTest extends IntegrationTestSupport {
 			User saveduser = userService.createUser(new UserCommand.Create(
 				"existing", "exist@example.com", "FEMALE", "1996-05-04"
 			));
-			UserId userIdToFind = saveduser.getUserId();
+			LoginId loginIdToFind = saveduser.getLoginId();
 
 			// when
-			Optional<User> result = userService.findByUserId(userIdToFind);
+			Optional<User> result = userService.findByUserId(loginIdToFind);
 
 			// then
-			verify(userRepository, times(1)).findByUserId(userIdToFind);
+			verify(userRepository, times(1)).findByUserId(loginIdToFind);
 			assertAll(
 				() -> assertThat(result).isPresent(),
-				() -> assertThat(result.get().getUserId()).isEqualTo(userIdToFind)
+				() -> assertThat(result.get().getLoginId()).isEqualTo(loginIdToFind)
 			);
 		}
 	}

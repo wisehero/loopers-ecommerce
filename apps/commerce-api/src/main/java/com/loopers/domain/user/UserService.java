@@ -19,7 +19,7 @@ public class UserService {
 		return userRepository.save(user);
 	}
 
-	public Optional<User> findByUserId(UserId userId) {
-		return userRepository.findByUserId(userId);
+	public Optional<User> findByUserId(LoginId loginId) {
+		return userRepository.findByUserId(loginId);
 	}
 }

@@ -12,9 +12,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 import com.loopers.support.error.CoreException;
 import com.loopers.support.error.ErrorType;
 
-class UserIdTest {
+class LoginIdTest {
 
-	@DisplayName("UserId 객체를 생성할 때")
+	@DisplayName("LoginId 객체를 생성할 때")
 	@Nested
 	class Create {
 
@@ -29,12 +29,12 @@ class UserIdTest {
 		})
 		void createSuccesfully_whenValidIdIsProvided(String validId) {
 			// when
-			UserId userId = UserId.of(validId);
+			LoginId loginId = LoginId.of(validId);
 
 			// then
 			assertAll(
-				() -> assertThat(userId).isNotNull(),
-				() -> assertThat(userId.value()).isEqualTo(validId)
+				() -> assertThat(loginId).isNotNull(),
+				() -> assertThat(loginId.value()).isEqualTo(validId)
 			);
 		}
 
@@ -50,7 +50,7 @@ class UserIdTest {
 		})
 		void throwsException_whenInvalidIdIsProvided(String invalidId) {
 			// when & then
-			assertThatThrownBy(() -> UserId.of(invalidId))
+			assertThatThrownBy(() -> LoginId.of(invalidId))
 				.isInstanceOf(CoreException.class)
 				.hasFieldOrPropertyWithValue("errorType", ErrorType.BAD_REQUEST)
 				.hasMessage("사용자 ID는 영문 및 숫자로 구성된 10자 이내여야 합니다.");

@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 public class User extends BaseEntity {
 
 	@Embedded
-	private UserId userId;
+	private LoginId loginId;
 
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
@@ -37,13 +37,13 @@ public class User extends BaseEntity {
 	private LocalDate birthDate;
 
 	public static User create(UserCommand.Create command) {
-		UserId userId = UserId.of(command.userId());
+		LoginId loginId = LoginId.of(command.userId());
 		Email email = Email.of(command.email());
 		Gender gender = Gender.fromInput(command.gender());
 		LocalDate birthDate = parseBirthDate(command.birthDate());
 
 		return new User(
-			userId,
+			loginId,
 			gender,
 			email,
 			birthDate

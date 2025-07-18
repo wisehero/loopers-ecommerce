@@ -45,7 +45,7 @@ public class UserV1Dto {
 
 		public static UserV1Dto.UserResponse from(UserInfo userInfo) {
 			return new UserV1Dto.UserResponse(
-				userInfo.userId().value(),
+				userInfo.loginId().value(),
 				userInfo.email().getEmailAddress(),
 				userInfo.gender().name(),
 				userInfo.birthDate().toString()

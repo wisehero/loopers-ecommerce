@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import com.loopers.domain.user.LoginId;
 import com.loopers.domain.user.User;
-import com.loopers.domain.user.UserId;
 import com.loopers.domain.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public Optional<User> findByUserId(UserId userId) {
-		return userJpaRepository.findByUserId(userId);
+	public Optional<User> findByUserId(LoginId loginId) {
+		return userJpaRepository.findByUserId(loginId);
 	}
 }

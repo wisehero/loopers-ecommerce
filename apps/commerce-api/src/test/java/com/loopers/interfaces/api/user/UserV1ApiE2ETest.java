@@ -22,7 +22,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 
 import com.loopers.domain.user.User;
-import com.loopers.domain.user.UserId;
+import com.loopers.domain.user.LoginId;
 import com.loopers.domain.user.dto.UserCommand;
 import com.loopers.infrastructure.user.UserJpaRepository;
 import com.loopers.interfaces.api.ApiResponse;
@@ -69,7 +69,7 @@ public class UserV1ApiE2ETest {
 			);
 			User savedUser = userJpaRepository.save(User.create(command));
 			String requestHeaderKey = "X-USER-ID";
-			String requestHeaderValue = savedUser.getUserId().value();
+			String requestHeaderValue = savedUser.getLoginId().value();
 
 			// when
 			var responseType = new ParameterizedTypeReference<ApiResponse<UserV1Dto.UserResponse>>() {
@@ -87,7 +87,7 @@ public class UserV1ApiE2ETest {
 				() -> assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK),
 				() -> {
 					UserV1Dto.UserResponse responseData = response.getBody().data();
-					assertThat(responseData.userId()).isEqualTo(savedUser.getUserId().value());
+					assertThat(responseData.userId()).isEqualTo(savedUser.getLoginId().value());
 					assertThat(responseData.email()).isEqualTo(savedUser.getEmail().getEmailAddress());
 					assertThat(responseData.gender()).isEqualTo(savedUser.getGender().name());
 					assertThat(responseData.birthDate()).isEqualTo(savedUser.getBirthDate().toString());
@@ -141,7 +141,7 @@ public class UserV1ApiE2ETest {
 					UserV1Dto.UserResponse responseData = response.getBody().data();
 					assertThat(responseData.userId()).isEqualTo("newUser");
 				},
-				() -> assertThat(userJpaRepository.findByUserId(UserId.of("newUser"))).isPresent()
+				() -> assertThat(userJpaRepository.findByUserId(LoginId.of("newUser"))).isPresent()
 			);
 		}
 

@@ -26,14 +26,14 @@ class UserTest {
 	class Create {
 
 		// MockedStatic 인스턴스를 필드로 선언
-		private MockedStatic<UserId> mockUserId;
+		private MockedStatic<LoginId> mockUserId;
 		private MockedStatic<Email> mockEmail;
 		private MockedStatic<Gender> mockGender;
 
 		@BeforeEach
 		void setUp() {
 			// 각 테스트 전에 정적 메서드 모킹을 활성화합니다.
-			mockUserId = mockStatic(UserId.class);
+			mockUserId = mockStatic(LoginId.class);
 			mockEmail = mockStatic(Email.class);
 			mockGender = mockStatic(Gender.class);
 		}
@@ -57,9 +57,9 @@ class UserTest {
 				"1996-05-04"
 			);
 
-			UserId fakeUserId = mock(UserId.class);
-			when(fakeUserId.value()).thenReturn("testuser");
-			mockUserId.when(() -> UserId.of("testuser")).thenReturn(fakeUserId);
+			LoginId fakeLoginId = mock(LoginId.class);
+			when(fakeLoginId.value()).thenReturn("testuser");
+			mockUserId.when(() -> LoginId.of("testuser")).thenReturn(fakeLoginId);
 
 			Email fakeEmail = mock(Email.class);
 			when(fakeEmail.getEmailAddress()).thenReturn("test@example.com");
@@ -71,13 +71,13 @@ class UserTest {
 			User user = User.create(command);
 
 			// then
-			mockUserId.verify(() -> UserId.of("testuser"), times(1));
+			mockUserId.verify(() -> LoginId.of("testuser"), times(1));
 			mockEmail.verify(() -> Email.of("test@example.com"), times(1));
 			mockGender.verify(() -> Gender.fromInput("MALE"), times(1));
 
 			assertAll(
 				() -> assertThat(user).isNotNull(),
-				() -> assertThat(user.getUserId().value()).isEqualTo("testuser"),
+				() -> assertThat(user.getLoginId().value()).isEqualTo("testuser"),
 				() -> assertThat(user.getEmail().getEmailAddress()).isEqualTo("test@example.com"),
 				() -> assertThat(user.getGender()).isEqualTo(Gender.MALE),
 				// birthDate는 모킹하지 않았으므로 실제 파싱 결과를 검증합니다.

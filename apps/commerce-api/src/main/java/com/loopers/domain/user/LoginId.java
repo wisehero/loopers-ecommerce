@@ -13,21 +13,21 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode
-public class UserId {
+public class LoginId {
 
 	private static final Pattern PATTERN = Pattern.compile("^[a-zA-Z0-9]{1,10}$");
 
 	private String userId;
 
-	private UserId(String userId) {
+	private LoginId(String userId) {
 		this.userId = userId;
 	}
 
-	public static UserId of(String userId) {
+	public static LoginId of(String userId) {
 		if (userId == null || !PATTERN.matcher(userId).matches()) {
 			throw new CoreException(ErrorType.BAD_REQUEST, "사용자 ID는 영문 및 숫자로 구성된 10자 이내여야 합니다.");
 		}
-		return new UserId(userId);
+		return new LoginId(userId);
 	}
 
 	public String value() {

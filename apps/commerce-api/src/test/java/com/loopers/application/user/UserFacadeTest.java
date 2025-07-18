@@ -93,7 +93,7 @@ class UserFacadeTest extends IntegrationTestSupport {
 			// then
 			assertAll(
 				() -> assertThat(result).isNotNull(),
-				() -> assertThat(result.userId().value()).isEqualTo("existing"),
+				() -> assertThat(result.loginId().value()).isEqualTo("existing"),
 				() -> assertThat(result.email().getEmailAddress()).isEqualTo("existing.user@example.com"),
 				() -> assertThat(result.gender().name()).isEqualTo("MALE")
 				, () -> assertThat(result.birthDate().toString()).isEqualTo("1996-05-04")
