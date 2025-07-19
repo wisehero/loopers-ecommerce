@@ -3,8 +3,8 @@ package com.loopers.application.user;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.loopers.domain.user.User;
 import com.loopers.domain.user.LoginId;
+import com.loopers.domain.user.User;
 import com.loopers.domain.user.UserService;
 import com.loopers.domain.user.dto.UserCommand;
 import com.loopers.domain.user.dto.UserInfo;

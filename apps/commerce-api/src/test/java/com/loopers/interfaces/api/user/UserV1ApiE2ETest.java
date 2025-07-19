@@ -21,8 +21,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 
-import com.loopers.domain.user.User;
 import com.loopers.domain.user.LoginId;
+import com.loopers.domain.user.User;
 import com.loopers.domain.user.dto.UserCommand;
 import com.loopers.infrastructure.user.UserJpaRepository;
 import com.loopers.interfaces.api.ApiResponse;
