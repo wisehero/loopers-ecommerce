@@ -13,7 +13,7 @@ fun getGitHash(): String {
 /** --- project configurations --- */
 plugins {
     java
-    id("org.springframework.boot") apply false
+    id("org.springframework.boot") apply false // 루트 프로젝트에는 직접 적용하지 않고 subProejcts에서 명시적으로 적용하겠다는 의미.
     id("io.spring.dependency-management")
 }
 
@@ -69,9 +69,10 @@ subprojects {
         testImplementation("org.testcontainers:junit-jupiter")
     }
 
-    tasks.withType(Jar::class) { enabled = true }
-    tasks.withType(BootJar::class) { enabled = false }
+    tasks.withType(Jar::class) { enabled = true } // 모든 서브 프로젝트의 일반 JAR 파일 생성 활성화
+    tasks.withType(BootJar::class) { enabled = false } // 모든 서브 프로젝트의 실행가능한 JAR 파일 생성 비활성화
 
+    // Apps 하위에 있는 것들은 일반 Jar를 생성하지 않고 실행 가능한 Jar로 생성
     configure(allprojects.filter { it.parent?.name.equals("apps") }) {
         tasks.withType(Jar::class) { enabled = false }
         tasks.withType(BootJar::class) { enabled = true }

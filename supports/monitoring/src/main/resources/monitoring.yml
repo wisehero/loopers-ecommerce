@@ -2,12 +2,17 @@ management:
   metrics:
     distribution:
       percentiles-histogram:
+        # HTTP 서버 요청에 대한 응답시간 분포 히스토그램 활성화
+        # P50, P95, P99 등의 Percentile 통계를 Prometheus에서 조회 가능
         http.server.requests: true
+    # 전송되는 모든 메트릭에 application=<애플리케이션명> 추가
     tags:
       application:
         ${spring.application.name}
   endpoints:
     web:
+      # 아래의 엔드포인트만 메트릭으로 노출한다.
+      # ex) localhost:8081/actuator/health, localhost:8081/actuator/prometheus
       exposure:
         include:
           - health
@@ -23,6 +28,7 @@ management:
             - livenessState
         readiness:
           show-components: always
+    # 프로메테우스 쓰기 요청은 불가하고 읽기 요청만 가능하게 한다.
     prometheus:
       access: read_only
   health:
@@ -30,9 +36,11 @@ management:
       enabled: true
     readinessState:
       enabled: true
+  # actuator 포트 지정
   server:
     port: 8081
   observations:
+    # @Timed, @Observed와 같은 애노테이션 기반 관찰 기능 활성화
     annotations:
       enabled: true
     key-values:
