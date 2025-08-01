@@ -83,7 +83,7 @@ class BrandTest {
 
 	@DisplayName("브랜드는 비활성화 할 수 있다.")
 	@Test
-	void deactivate_bradn() {
+	void deactivate_brand() {
 		// given
 		Brand brand = Brand.create("나이키", "Just Do It");
 		brand.activate();

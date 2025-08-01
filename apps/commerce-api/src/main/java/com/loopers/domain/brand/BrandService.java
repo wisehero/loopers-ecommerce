@@ -22,11 +22,11 @@ public class BrandService {
 	}
 
 	public BrandResult.BrandInfo findBrand(Long brandId) {
-		Brand founddBrand = brandRepository.find(brandId)
+		Brand foundBrand = brandRepository.find(brandId)
 			.orElseThrow(
 				() -> new CoreException(ErrorType.NOT_FOUND, "조회 요청한 브랜드가 없습니다.")
 			);
 
-		return BrandResult.BrandInfo.from(founddBrand);
+		return BrandResult.BrandInfo.from(foundBrand);
 	}
 }
